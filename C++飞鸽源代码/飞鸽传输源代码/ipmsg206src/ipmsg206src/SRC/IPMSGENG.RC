@@ -1,0 +1,662 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_DEFAULT
+#pragma code_page(437)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+SEND_DIALOG DIALOGEX 0, 0, 176, 145
+STYLE DS_SETFOREGROUND | DS_3DLOOK | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_ACCEPTFILES
+CAPTION "Send Message"
+FONT 9, "Verdana", 0, 0, 0x1
+BEGIN
+    EDITTEXT        SEND_EDIT,5,82,165,38,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_NOHIDESEL | ES_WANTRETURN | WS_VSCROLL | WS_GROUP
+    DEFPUSHBUTTON   "Send",IDOK,65,124,48,15,WS_GROUP
+    CONTROL         "seal",SECRET_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,121,125,25,13
+    CONTROL         "lock",PASSWORD_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,149,125,27,13
+    PUSHBUTTON      "Refresh",REFRESH_BUTTON,141,31,31,15,0,WS_EX_CLIENTEDGE
+    CTEXT           "Member\r\n1000",MEMBERCNT_TEXT,141,8,31,18,SS_SUNKEN
+    LTEXT           "",SEPARATE_STATIC,5,58,164,3,SS_SUNKEN
+    CONTROL         "List1",HOST_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SHAREIMAGELISTS | WS_BORDER | WS_TABSTOP,4,3,133,52,
+                    WS_EX_CLIENTEDGE
+    PUSHBUTTON      "ipmsg.exe(100KB)",FILE_BUTTON,5,64,165,15,BS_LEFT | NOT 
+                    WS_VISIBLE | WS_DISABLED,WS_EX_CLIENTEDGE
+END
+
+SETUP_DIALOG DIALOGEX 0, 0, 186, 210
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "IP Messenger Settings"
+FONT 8, "Verdana", 0, 0, 0x1
+BEGIN
+    CONTROL         "Message open check",OPEN_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,50,79,10
+    CONTROL         "None Popup Check",NOPOPUP_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,64,79,10
+    CONTROL         "No receive sound",NOBEEP_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,78,79,10
+    CONTROL         "Default sealed check",SECRET_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,92,79,10
+    CONTROL         "Default quoted check",QUOTE_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,106,79,10
+    EDITTEXT        NICKNAME_EDIT,11,15,68,12,ES_AUTOHSCROLL
+    COMBOBOX        GROUP_COMBO,97,14,77,66,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Details/Log Settings",LOG_BUTTON,100,71,79,14,BS_CENTER | 
+                    BS_VCENTER
+    PUSHBUTTON      "Clickable URL",URL_BUTTON,100,88,79,14
+    PUSHBUTTON      "Password Settings",PASSWORD_BUTTON,100,105,79,14
+    EDITTEXT        BROADCAST_EDIT,11,154,66,13,ES_AUTOHSCROLL
+    PUSHBUTTON      ">>",ADD_BUTTON,82,147,14,11
+    PUSHBUTTON      "<<",DEL_BUTTON,82,161,14,11
+    LISTBOX         BROADCAST_LIST,102,139,70,42,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | 
+                    LBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Dial-up check",DIALUP_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,170,59,10
+    DEFPUSHBUTTON   "OK",IDOK,62,191,52,14
+    GROUPBOX        "User name",IDC_STATIC,6,3,80,29,BS_CENTER
+    GROUPBOX        "Group name",IDC_STATIC,90,3,89,29,BS_CENTER
+    GROUPBOX        "Send/Receive Option",IDC_STATIC,6,37,89,85
+    GROUPBOX        "Broadcast Setup for Wide Area Network",IDC_STATIC,6,126,
+                    173,60
+    LTEXT           "Ex) 192.168.10.255\r\n       (or FQDN)",IDC_STATIC,9,
+                    135,71,16
+    PUSHBUTTON      "apply",SET_BUTTON,148,189,24,13
+    LTEXT           "Sort/Filter settings are available by Right click on Send/RecvDlg",
+                    IDC_STATIC,99,39,80,28,0,WS_EX_STATICEDGE
+END
+
+RECEIVE_DIALOG DIALOGEX 0, 0, 177, 129
+STYLE WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Receive Message"
+FONT 9, "Verdana", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Open",OPEN_BUTTON,13,48,153,51,BS_CENTER | BS_VCENTER
+    DEFPUSHBUTTON   "Reply",IDOK,92,109,47,14
+    PUSHBUTTON      "Close",IDCANCEL,33,109,46,14
+    EDITTEXT        RECV_EDIT,7,57,163,45,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_NOHIDESEL | ES_READONLY | WS_VSCROLL | WS_GROUP
+    CONTROL         "Quote",QUOTE_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,144,111,32,10
+    GROUPBOX        "Message From...",RECV_TITLE,7,2,163,35
+    CTEXT           "Static",RECV_HEAD,10,13,157,10,SS_NOPREFIX
+    CTEXT           "Static",RECV_HEAD2,10,26,157,9
+    PUSHBUTTON      "ipmsg.exe(100KB)",FILE_BUTTON,7,40,163,15,BS_LEFT | NOT 
+                    WS_VISIBLE | WS_DISABLED,WS_EX_CLIENTEDGE
+END
+
+ABOUT_DIALOG DIALOGEX 0, 0, 126, 81
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About IP Messenger"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,44,63,35,11
+    ICON            IPMSG_ICON,IDC_STATIC,6,5,18,20,SS_SUNKEN
+    CTEXT           "IP Messenger for Win\r\nversion 2.06",IDC_STATIC,29,4,
+                    80,20,SS_SUNKEN
+    CTEXT           "Copyright(c)1996-2004 H.Shirouzu",IDC_STATIC,2,50,118,9
+    PUSHBUTTON      "http://www.ipmsg.org",IPMSGWEB_BUTTON,5,29,118,17,
+                    BS_CENTER | BS_VCENTER,WS_EX_DLGMODALFRAME | 
+                    WS_EX_CLIENTEDGE | WS_EX_STATICEDGE
+END
+
+LOG_DIALOG DIALOG DISCARDABLE  0, 0, 194, 226
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Details & Log Settings"
+FONT 8, "Verdana"
+BEGIN
+    CONTROL         "OpenCheckDialog is icon",MSGMINIMIZE_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,16,102,10
+    CONTROL         "Don't close ReceiveDialog, when reply",NOERASE_CHECK,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,64,150,10
+    CONTROL         "Use Hotkey (Alt+Ctl+S,R)",HOTKEY_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,40,109,10
+    CONTROL         "Change Send/Reply -> Fire/Intercept",ABNORMALBTN_CHECK,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,52,152,10
+    CONTROL         "One click open SendDialog",ONECLICK_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,28,106,10
+    CONTROL         "Don't popup ReceiveDialog, if absence mode",
+                    ABSENCENONPOPUP_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,76,166,10
+    EDITTEXT        QUOTE_EDIT,136,24,39,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Sound",SOUNDFILE_BUTTON,13,91,30,14
+    EDITTEXT        SOUND_EDIT,48,91,133,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Icon",MAINICON_BUTTON,13,109,29,14
+    EDITTEXT        MAINICON_EDIT,46,110,50,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "RevIcon",REVICON_BUTTON,100,109,29,14
+    EDITTEXT        REVICON_EDIT,132,110,49,13,ES_AUTOHSCROLL
+    CONTROL         "Logging available",LOG_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,147,110,10
+    CONTROL         "Locked seal message is logged after opened",
+                    PASSWDLOG_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,
+                    160,159,10
+    PUSHBUTTON      "LogFile",LOGFILE_BUTTON,13,185,47,14
+    EDITTEXT        LOG_EDIT,64,185,118,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,70,207,54,15
+    GROUPBOX        "Details",IDC_STATIC,7,4,180,124
+    GROUPBOX        "Log settings",LOG_GROUP,7,133,180,71
+    GROUPBOX        "QuoteStr",IDC_STATIC,131,12,50,29
+    PUSHBUTTON      "apply",SET_BUTTON,158,206,24,13
+    CONTROL         "LogonName",NICKNAME_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,21,172,63,9
+    CONTROL         "IP address",IPADDR_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,95,172,68,9
+END
+
+PASSWORD_DIALOG DIALOG DISCARDABLE  0, 0, 84, 22
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter Password"
+FONT 8, "Verdana"
+BEGIN
+    EDITTEXT        PASSWORD_EDIT,6,3,48,13,ES_LOWERCASE | ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,58,3,21,14
+END
+
+PASSWDCHANGE_DIALOG DIALOG DISCARDABLE  0, 0, 115, 87
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Password Settings"
+FONT 8, "Verdana"
+BEGIN
+    EDITTEXT        OLDPASSWORD_EDIT,48,11,48,13,ES_LOWERCASE | ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    EDITTEXT        NEWPASSWORD_EDIT,48,27,48,13,ES_LOWERCASE | ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    EDITTEXT        NEWPASSWORD_EDIT2,48,43,48,13,ES_LOWERCASE | ES_PASSWORD | 
+                    ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,29,67,50,14
+    LTEXT           "Old Password",IDC_STATIC,14,14,20,8
+    LTEXT           "New Password",IDC_STATIC,14,29,21,8
+    LTEXT           "Verify Password",IDC_STATIC,14,44,29,8
+    GROUPBOX        "",IDC_STATIC,5,1,102,61
+END
+
+MESSAGE_DIALOG DIALOG DISCARDABLE  0, 0, 84, 48
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_DISABLED | WS_CAPTION | 
+    WS_SYSMENU
+FONT 8, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,20,27,44,14
+    CTEXT           "MSG",MESSAGE_TEXT,0,9,84,17
+END
+
+ABSENCE_DIALOG DIALOGEX 0, 0, 219, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Absence Setting"
+FONT 8, "Verdana", 0, 0, 0x1
+BEGIN
+    EDITTEXT        ABSENCE_EDIT,74,35,133,36,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_NOHIDESEL | ES_WANTRETURN | WS_VSCROLL
+    DEFPUSHBUTTON   "Set && Absence",IDOK,71,83,70,15
+    PUSHBUTTON      "Set",SET_BUTTON,177,84,35,14
+    LISTBOX         ABSENCE_LIST,12,17,43,67,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    LBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        ABSENCEHEAD_EDIT,103,17,47,13,ES_AUTOHSCROLL
+    LTEXT           "Title",IDC_STATIC,81,19,18,10
+    GROUPBOX        "Absence List",IDC_STATIC,7,4,54,87,BS_CENTER
+    GROUPBOX        "Setting contents",IDC_STATIC,68,4,144,73,BS_CENTER
+    PUSHBUTTON      "Initialize",ABSENCEINIT_BUTTON,168,16,38,13,NOT 
+                    WS_TABSTOP,WS_EX_STATICEDGE
+END
+
+URL_DIALOG DIALOG DISCARDABLE  0, 0, 215, 166
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Clickable URL Settings"
+FONT 8, "Verdana"
+BEGIN
+    CONTROL         "Useing default browser, if not specified",
+                    DEFAULTURL_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    15,21,179,10
+    LISTBOX         URL_LIST,14,57,49,35,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    LBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "File",ADD_BUTTON,173,57,26,13,BS_CENTER
+    EDITTEXT        URL_EDIT,67,75,134,14,ES_AUTOHSCROLL
+    CONTROL         "Double click execute(like double click in explore)",
+                    SHELLEXEC_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,
+                    121,184,10
+    DEFPUSHBUTTON   "OK",IDOK,86,145,50,14
+    GROUPBOX        "Double click behavior except URL",IDC_STATIC,7,107,201,
+                    32
+    GROUPBOX        "Clickable URL -- Default Settings",IDC_STATIC,7,7,201,
+                    31
+    GROUPBOX        "Clickable URL -- Protocol Settings",IDC_STATIC,7,44,201,
+                    55
+    LTEXT           "Execute program",IDC_STATIC,71,60,36,10
+    PUSHBUTTON      "apply",SET_BUTTON,182,146,24,13
+END
+
+SORT_DIALOG DIALOG DISCARDABLE  0, 0, 155, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Member Sort/Display Settings"
+FONT 8, "Verdana"
+BEGIN
+    CONTROL         "Group name",GROUP_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,21,90,54,10
+    CONTROL         "reverse",GROUPREV_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,81,89,43,13
+    CONTROL         "User name",USER_RADIO,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,18,119,49,10
+    CONTROL         "Machine name",HOST_RADIO,"Button",BS_AUTORADIOBUTTON,18,
+                    132,61,10
+    CONTROL         "IP address",IPADDR_RADIO,"Button",BS_AUTORADIOBUTTON,81,
+                    119,51,10
+    CONTROL         "reverse",SUBREV_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,87,132,43,12
+    CONTROL         "Ignore capital/small letters",ICMP_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,21,151,110,10
+    DEFPUSHBUTTON   "OK",IDOK,55,165,50,14
+    GROUPBOX        "First sort key",IDC_STATIC,12,80,132,26
+    GROUPBOX        "Second sort key",IDC_STATIC,12,107,132,41
+    GROUPBOX        "Broadly Sort Settings",IDC_STATIC,7,70,141,95
+    GROUPBOX        "UserList Display option",IDC_STATIC,7,0,141,68
+    CONTROL         "GridLines",GLIDLINE_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,93,25,44,10
+    CONTROL         "IP addr",IPADDR_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,50,25,39,10
+    CONTROL         "Logon",LOGON_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,25,33,10
+    CONTROL         "Host",HOST_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    50,11,34,10
+    CONTROL         "DispPriority",PRIORITY_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,92,11,51,10
+    LTEXT           "How to change header order :\r\nHeader Drag&&Drop and execute ""save list header"" menu item",
+                    IDC_STATIC,12,39,132,26,SS_SUNKEN
+    CONTROL         "Group",GROUPDISP_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,12,11,34,10
+END
+
+FIND_DIALOG DIALOGEX 0, 0, 110, 35
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Search"
+FONT 8, "Verdana", 0, 0, 0x1
+BEGIN
+    COMBOBOX        FIND_COMBO,4,5,71,71,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_GROUP | 
+                    WS_TABSTOP
+    CONTROL         "All Item Search",ALLFIND_CHECK,"Button",BS_AUTOCHECKBOX | 
+                    WS_GROUP | WS_TABSTOP,6,19,67,14
+    PUSHBUTTON      "OK",CLOSE_BUTTON,79,21,28,12
+    DEFPUSHBUTTON   "Search",IDOK,79,4,28,14,WS_GROUP
+END
+
+FILE_DIALOG DIALOGEX 0, 0, 218, 94
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Download Accept Files"
+FONT 8, "Verdana", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "FileAdd",FILE_BUTTON,7,72,40,15
+    PUSHBUTTON      "FolderAdd",FOLDER_BUTTON,50,72,41,15
+    PUSHBUTTON      "Delete",DEL_BUTTON,100,72,40,15
+    DEFPUSHBUTTON   "Close",IDOK,164,72,40,15
+    CONTROL         "List2",FILE_LIST,"SysListView32",LVS_REPORT | WS_BORDER | 
+                    WS_TABSTOP,7,7,204,59,WS_EX_CLIENTEDGE
+END
+
+SHARE_DIALOG DIALOGEX 0, 0, 265, 121
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES
+CAPTION "(File trasnfer) Download status monitor"
+FONT 8, "Verdana", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,58,81,45,15
+    PUSHBUTTON      "Delete",DEL_BUTTON,7,82,46,15
+    CONTROL         "Not allow file transfer, if target file was changed.",
+                    MODIFY_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,99,
+                    232,15
+    CONTROL         "List2",SHARE_LIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,7,7,251,71,WS_EX_CLIENTEDGE
+END
+
+TRANSEND_DIALOG DIALOG DISCARDABLE  0, 0, 131, 53
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File Transfer Complete"
+FONT 8, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,4,32,29,14
+    PUSHBUTTON      "Open Folder",FOLDER_BUTTON,35,32,46,14
+    PUSHBUTTON      "Execute",EXEC_BUTTON,83,32,44,14
+    CTEXT           "Static",FILE_STATIC,8,7,116,20,SS_SUNKEN
+END
+
+SUSPEND_DIALOG DIALOG DISCARDABLE  0, 0, 131, 51
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File Transfer Error"
+FONT 8, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "Retry",IDRETRY,18,32,40,14
+    PUSHBUTTON      "Suspend",IDCANCEL,69,32,40,14
+    CTEXT           "Static",FILE_STATIC,7,7,117,20,SS_SUNKEN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    SEND_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 169
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
+    END
+
+    SETUP_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 202
+    END
+
+    RECEIVE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 170
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+        HORZGUIDE, 80
+    END
+
+    ABOUT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 123
+        VERTGUIDE, 5
+        BOTTOMMARGIN, 76
+        HORZGUIDE, 50
+    END
+
+    LOG_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 187
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 219
+    END
+
+    PASSWORD_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 77
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 15
+    END
+
+    PASSWDCHANGE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 108
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 80
+    END
+
+    MESSAGE_DIALOG, DIALOG
+    BEGIN
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 41
+    END
+
+    ABSENCE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 212
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 98
+    END
+
+    URL_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 159
+    END
+
+    SORT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 148
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 179
+    END
+
+    FIND_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 108
+        BOTTOMMARGIN, 33
+    END
+
+    FILE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 211
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+
+    SHARE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 258
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    TRANSEND_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 127
+        VERTGUIDE, 69
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 46
+    END
+
+    SUSPEND_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 124
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 45
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IPMSG_ICON              ICON    DISCARDABLE     "ipmsg.ico"
+RECV_ICON               ICON    DISCARDABLE     "ipmsgrev.ico"
+ABSENCE_ICON            ICON    DISCARDABLE     "absence.ico"
+IPMSGV1_ICON            ICON    DISCARDABLE     "v1.ico"
+IPMSGV1ABS_ICON         ICON    DISCARDABLE     "v1abs.ico"
+FILE_ICON               ICON    DISCARDABLE     "file.ico"
+FILEABS_ICON            ICON    DISCARDABLE     "fileabs.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+MAIN_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Floating"
+    BEGIN
+        MENUITEM "Delete OpenMsg",              MENU_DELMISCDLG
+        MENUITEM "All Window on Top",           MENU_ACTIVEWIN
+        MENUITEM SEPARATOR
+        MENUITEM "Settings...",                 MENU_SETUP
+        MENUITEM "About IPMSG",                 MENU_ABOUT
+        MENUITEM "View Log",                    MENU_LOGOPEN
+        MENUITEM SEPARATOR
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        MENU_EXIT
+    END
+END
+
+SENDFONT_MENU MENU DISCARDABLE 
+BEGIN
+    MENUITEM "List section...",             MENU_LISTFONT
+    MENUITEM "Edit section...",             MENU_EDITFONT
+    MENUITEM "Restore default",             MENU_DEFAULTFONT
+END
+
+RECVFONT_MENU MENU DISCARDABLE 
+BEGIN
+    MENUITEM "Head section...",             MENU_HEADFONT
+    MENUITEM "Edit section...",             MENU_EDITFONT
+    MENUITEM "Restore default",             MENU_DEFAULTFONT
+END
+
+SIZE_MENU MENU DISCARDABLE 
+BEGIN
+    MENUITEM "Save size as default",        MENU_SAVESIZE
+    MENUITEM "Restore default (temporary)", MENU_NORMALSIZE
+END
+
+SENDLIST_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Floating"
+    BEGIN
+        MENUITEM "Get absence info",            MENU_ABSENCE
+        MENUITEM "Get version info",            MENU_VERSION
+    END
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,6,0
+ PRODUCTVERSION 2,0,6,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "IP Messenger for Win(English)\0"
+            VALUE "CompanyName", "H.Shirouzu\0"
+            VALUE "FileDescription", "IPMsg English\0"
+            VALUE "FileVersion", "2.06\0"
+            VALUE "InternalName", "Chotto, Itoh san.\0"
+            VALUE "LegalCopyright", "Copyright (c) 1996-2004 H.Shirouzu \0"
+            VALUE "OriginalFilename", "IPMsg.exe\0"
+            VALUE "ProductName", "IPMsg English\0"
+            VALUE "ProductVersion", "2.06\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IPMSG_ACCEL ACCELERATORS DISCARDABLE 
+BEGIN
+    "A",            ALLSELECT_ACCEL,        VIRTKEY, CONTROL, NOINVERT
+    "D",            HIDE_ACCEL,             VIRTKEY, CONTROL, NOINVERT
+    "D",            MISC_ACCEL,             VIRTKEY, CONTROL, ALT, NOINVERT
+    "F",            MENU_FINDDLG,           VIRTKEY, CONTROL, NOINVERT
+END
+
+#endif    // “ú–{Œê resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

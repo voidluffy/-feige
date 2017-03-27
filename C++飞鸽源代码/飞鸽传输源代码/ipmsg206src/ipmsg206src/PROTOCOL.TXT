@@ -1,0 +1,337 @@
+(Japanese)
+----------------------------------------------------------------------
+        IP Messenger 通信プロトコル仕様(ドラフト9版）      1996/02/21
+                                                    Modify 2003/01/14
+
+                                                           H.Shirouzu
+                                               shirouzu@h.email.ne.jp
+----------------------------------------------------------------------
+
+概要
+	TCP/UDP Port を使用した、メッセージ送受信サービスです
+
+特徴
+	TCP/IP が使えれば OS の種類を問いません。自分のいるネットワーク
+	内（および指定のネットワーク）で、動的なメンバ認識ができます。
+	メッセージ送信そのものは、IP接続している全メンバに対し行えます。
+
+詳細
+	TCP/UDP ポート(default:2425)を使用して、以下の方法で処理します。
+	（メッセージ送受信:UDP、ファイル送受信:TCP を使用）
+
+  1.コマンド
+
+     1) コマンド種類 (command番号(32bit)のうち、下位8bit)
+
+	IPMSG_NOOPERATION	無操作
+	IPMSG_BR_ENTRY		サービスにエントリ（起動時にBroadcast）
+	IPMSG_BR_EXIT		サービスから抜ける（終了時にBroadcast）
+	IPMSG_ANSENTRY		エントリを認識したことを通知
+	IPMSG_BR_ABSENCE	不在モード変更
+
+	IPMSG_BR_ISGETLIST	ホストリスト送出可能メンバの探索
+	IPMSG_OKGETLIST		ホストリスト送出可能通知
+	IPMSG_GETLIST		ホストリスト送出要求
+	IPMSG_ANSLIST		ホストリスト送出
+
+	IPMSG_SENDMSG		メッセージの送信
+	IPMSG_RECVMSG		メッセージの受信確認
+
+	IPMSG_READMSG		封書の開封通知
+	IPMSG_DELMSG		封書破棄通知
+	IPMSG_ANSREADMSG	封書の開封確認（8 版から追加）
+
+	IPMSG_GETFILEDATA	添付ファイル要求（TCP で使用）
+	IPMSG_RELEASEFILES	添付ファイル破棄
+	IPMSG_GETDIRFILES	添付階層ファイル要求
+
+	IPMSG_GETINFO		IPMSGバージョン情報取得
+	IPMSG_SENDINFO		IPMSGバージョン情報応答
+
+	IPMSG_GETABSENCEINFO	不在通知文取得
+	IPMSG_SENDABSENCEINFO	不在通知文応答
+
+	IPMSG_GETPUBKEY		RSA 公開鍵取得
+	IPMSG_ANSPUBKEY		RSA 公開鍵応答
+
+     2) オプションフラグ種類 (command番号(32bit)のうち、上位24bit)
+
+	IPMSG_ABSENCEOPT	不在モード（メンバ認識系コマンドで使用）
+	IPMSG_SERVEROPT		サーバー（予約）
+	IPMSG_DIALUPOPT		メンバ認識系のコマンドを個別に送り返す
+
+	IPMSG_SENDCHECKOPT	送信チェック
+	IPMSG_SECRETOPT		封書
+	IPMSG_READCHECKOPT	封書確認（8 版から追加）
+	IPMSG_PASSWORDOPT	錠前
+	IPMSG_BROADCASTOPT	ブロードキャスト（同報）
+	IPMSG_MULTICASTOPT	マルチキャスト（複数選択）
+	IPMSG_NEWMUTIOPT	ニューバージョンマルチキャスト（予約）
+	IPMSG_AUTORETOPT	自動応答（ピンポン防止用）
+	IPMSG_NOLOGOPT		ログに残さない（ことを推奨）
+	IPMSG_NOADDLISTOPT	BR_ENTRYしていない一時メンバ通知
+
+	IPMSG_FILEATTACHOPT	ファイル添付
+	IPMSG_ENCRYPTOPT	暗号
+
+	IPMSG_NOPOPUPOPT	（使用しなくなりました）
+	IPMSG_RETRYOPT		再送フラグ（HOSTLIST 取得時に使用）
+
+     3) 暗号拡張部用フラグ (拡張部に組み合わせを hex 表現で使用)
+
+	IPMSG_RSA_512
+	IPMSG_RSA_1024
+	IPMSG_RSA_2048
+	IPMSG_RC2_40
+	IPMSG_RC2_128
+	IPMSG_RC2_256
+	IPMSG_BLOWFISH_128
+	IPMSG_BLOWFISH_256
+	IPMSG_SIGN_MD5
+
+     4) 添付ファイル拡張用ファイル種類（fileattr下位8bit）
+
+	IPMSG_FILE_REGULAR
+	IPMSG_FILE_DIR
+	IPMSG_FILE_RETPARENT
+	IPMSG_FILE_SYMLINK
+	IPMSG_FILE_CDEV
+	IPMSG_FILE_BDEV
+	IPMSG_FILE_FIFO
+	IPMSG_FILE_RESFORK
+
+     5) 添付ファイル拡張用ファイル属性（fileattr上位24bit）
+
+	IPMSG_FILE_RONLYOPT
+	IPMSG_FILE_HIDDENOPT
+	IPMSG_FILE_EXHIDDENOPT
+	IPMSG_FILE_ARCHIVEOPT
+	IPMSG_FILE_SYSTEMOPT
+
+     6) 添付ファイル拡張用拡張ファイル属性
+
+	IPMSG_FILE_UID
+	IPMSG_FILE_USERNAME
+	IPMSG_FILE_GID
+	IPMSG_FILE_GROUPNAME
+	IPMSG_FILE_PERM
+	IPMSG_FILE_MAJORNO
+	IPMSG_FILE_MINORNO
+	IPMSG_FILE_CTIME
+	IPMSG_FILE_MTIME
+	IPMSG_FILE_ATIME
+	IPMSG_FILE_CREATETIME
+
+	IPMSG_FILE_CREATOR
+	IPMSG_FILE_FILETYPE
+	IPMSG_FILE_FINDERINFO
+
+	IPMSG_FILE_ACL
+	IPMSG_FILE_ALIASFNAME
+	IPMSG_FILE_UNICODEFNAME
+
+
+  2.コマンドフォーマット（すべて文字列として表現）
+
+     1) コマンド（フォーマットバージョン1）
+
+	Ver(1) : Packet番号 : 自User名 : 自Host名 : Command番号 : 追加部
+
+     2) 現在のコマンドフォーマットによるメッセージの送信文字列例
+
+	"1:100:shirouzu:jupiter:32:Hello"
+
+
+  3.コマンド処理概要
+
+     1) メンバ認識
+
+	起動時に、IPMSG_BR_ENTRY コマンドをブロードキャストし、すでに
+	立ち上がっているメンバに、新規参加を知らせます。
+
+	このブロードキャストにより、すでに立ち上がっているメンバは、
+	自分の送信先リストに新規参加メンバの情報を追加します。さらに、
+	IPMSG_ANSENTRY コマンドをその新規参加メンバに対し、返信します。
+
+	新規参加メンバは、この IPMSG_ANSENTRY を受信することにより、
+	すでに立ち上がっている全メンバの情報を得ることができます。
+	したがい、IPパケットが失われない限りは、全てのメンバが同一の
+	送信先リストを保持できるというわけです。
+
+	不在モードやニックネームの変更などを、メンバ全員に通知するには、
+	IPMSG_BR_ABSENCE をブロードキャストします。（IPMSG_BR_ENTRY と
+	違い、受け取ったメンバは IPMSG_ANSENTRY を返しません）
+
+	IPMSG_BR_ENTRY, IPMSG_ANSENTRY, IPMSG_BR_ABSENCE コマンドでは、
+	不在モードにあわせて IPMSG_ABSENCEOPT を立てて、コマンドの追加
+	部にはニックネームを入れます。また、ダイアルアップユーザなど、
+	ネットワーク指定のブロードキャストが届かないメンバは、さらに、
+	IPMSG_DIALUPOPT を立てます。このオプションが立っているメンバに
+	は、メンバ認識系のコマンドを個別に送出します。
+
+	（グループ化拡張について）IPMSG_BR_ENTRY, IPMSG_BR_ABSENCE の
+	２コマンドにおいて、従来のコマンドフォーマット文字列に続いて(
+	'\0'を挟んで)グループ名を入れることによって、自分の所属(設定)
+	するグループ名を伝えることができます。
+
+     2) メッセージ送受信
+
+	メッセージ送信には IPMSG_SENDMSG を使用し、拡張部にメッセージ
+	本体を入れます。受信側は、IPMSG_SENDCHECKOPT が立っている場合
+	に限り、IPMSG_RECVMSG を返します。拡張部には元のパケット番号を
+	入れます。
+
+	ブロードキャストによるメッセージ送信は、IPMSG_BOADCASTOPT を
+	立てた IPMSG_SENDMSG を使用します。（不在通知文など）自動送出
+	されるパケットには、ピンポン防止のため IPMSG_AUTORETOPT をつけ
+	ます。どちらかのオプションが立っているパケットには、確認および
+	自動送出パケットを返しません。
+
+	封書で送出するには、IPMSG_SECRETOPT を立てたパケットを送出しま
+	す。この場合、受信側は開封時に IPMSG_READMSG を送出します。
+	拡張部には元のパケット番号を入れます。
+
+	（追加された、IPMSG_NOADDLISTOPT について）
+	自分の送信先リストに載っていないホストからの IPMSG_SENDMSG
+	パケット到着時には、
+	・ 送信先に IPMSG_BR_ENTRY を送信して、ホスト存在確認を行う
+	・ 直接自分の送信先リストに加える
+	のいずれかの処理を行うことにより、エントリー系パケット取りこぼ
+	しをフォローする実装が考えられます。しかし、エントリーを行わな
+	い単発メッセージ送信の場合は、これは望ましくない動作ですので、
+	この場合は受信ホストにそのようなフォロー動作をしないことを推奨
+	するため、IPMSG_SENDMSG に IPMSG_NOADDLISTOPT フラグを立てます。
+
+	（8版で追加された、IPMSG_READCHECKOPT について）
+	IPMSG_READMSG に、IPMSG_READCHECKOPT がついていた場合、丁度、
+	IPMSG_SENDMSG における IPMSG_SENDCHECKOPT のように処理します。
+	ただし、返信には、IPMSG_RECVMSG ではなく、IPMSG_ANSREADMSG
+	を使用します。
+
+     3) メッセージ送受信－暗号化拡張（9版で追加）
+
+	公開鍵(RSA)と共通鍵(RC2/Blowfish)を組み合わせて実現します。
+	（暗号関連の拡張部はすべて、hex フォーマットで表します）
+
+	（公開鍵取得）まず受信側に IPMSG_GETPUBKEY を送信します。相手
+	から IPMSG_ANSPUBKEY を受け取ることにより、相手側 RSA 公開鍵
+	を得ます。IPMSG_GETPUBKEY/IPMSG_ANSPUBKEY ともに、拡張部の最初
+	に自ホストの暗号対応能力（IPMSG_RSA_1024 等）をフラグの OR で
+	表した値を入れます。
+	さらに、IPMSG_ANSPUBKEY では':'を挟んで、公開鍵を EE-NNNNNN
+	（E=指数、N=法）という形を入れます。E と N の間には '-' を
+	入れて、区切りにします。
+	なお、２度目以降の送信時には、公開鍵および暗号対応能力を記憶
+	することにより、このシーケンスを省略することができます。
+
+	（メッセージ暗号化）送信側は、両者でサポートしている共通鍵
+	種類を選んでセッション用共通鍵を作り、その共通鍵を用いて本文
+	を暗号化します。さらにその共通鍵を相手側公開鍵で暗号化します。
+
+	（暗号メッセージ送信）IPMSG_SENDMSG に IPMSG_ENCRYPTOPT を
+	を立てて、拡張部の最初に、暗号化に使用した公開鍵/共通鍵種類
+	の組み合わせを OR で表現した値を入れ、':'をはさんで公開鍵で
+	暗号化した共通鍵を入れ、さらに':'をはさんで共通鍵で暗号化し
+	た本文を入れます。両者が IPMSG_SIGN_XXX をサポートしている
+	場合は、さらに':'をはさんで署名を続けます。
+
+	なお、エンコード・パディング方式については、RSA 鍵は PKCS#1
+	ECB、RC2/blowfish 共通鍵は PKCS#5 CBC を使用します。(IV=0)
+	また、Entry 系パケットには IPMSG_ENCRYPTOPT を立て、暗号機能
+	をサポート可能であることを表明します。
+
+     4) ファイル添付拡張（9版で追加）
+
+	ファイル添付（ダウンロード許可）通知するには、IPMSG_SENDMSG
+	に IPMSG_FILEATTACHOPT を立てたメッセージを送信します。
+	その際、通常（or 暗号）メッセージに続けて、'\0'をはさんで、
+	添付（ダウンロード許可）ファイル情報を列挙します。
+
+	fileID:filename:size:mtime:fileattr[:extend-attr=val1
+	[,val2...][:extend-attr2=...]]:\a:fileID...
+	(なお、size, mtime, fileattr は hex で表現します。
+	 filenameに':'がある場合、"::"でエスケープします)
+
+	受信側が添付ファイルをダウンロードしたい場合、送信元UDPポート
+	と同じ番号のTCPポートに対して、IPMSG_GETFILEDATA コマンドを使
+	い、拡張部に packetID:fileID:offset を入れて、データ送信要求
+	パケットを出します。（すべてhex）
+	添付側がそのリクエストを受信して、送信要求を正しいと認めると、
+	その通信路に該当ファイルのデータを流します（フォーマットなし）
+
+	受信側が階層添付ファイルをダウンロードしたい場合は、コマンド
+	に IPMSG_GETDIRFILES を使い、拡張部に packetID:fileID を入れて
+	データ送信要求パケットを出します。（すべてhex）
+
+	データ送信側は、以下のフォーマットで階層データを流します。
+	header-size:filename:file-size:fileattr[:extend-attr=val1
+	[,val2...][:extend-attr2=...]]:contents-data
+	次のheadersize:次のfilename...
+	（filename と contetns-data 以外はすべて hex）
+
+	header-size は header-size の先頭から contents-data の直前の
+	':'までのサイズをあらわします。extend-attr は省略可かつ複数
+	存在可能な拡張属性で、'='で対応するデータ値を入れます。
+
+	fileattr が IPMSG_FILE_DIR の場合、自動的にそのディレクトリに
+	潜った状態とみなして、後続のファイル情報が続きます。
+
+	fileattr が IPMSG_FILE_RETPARENT の場合、親ディレクトリに戻
+	ることを表し、ファイル名は常に"."です。このときの属性値は、
+	親ディレクトリに戻る前の、現在ディレクトリの情報を表します。
+
+	送信は添付ディレクトリ自体から開始し、最後に添付ディレクトリ
+	に戻る IPMSG_FILE_RETPARENT 情報を送信して終了を伝えます。
+
+	なお、Entry 系パケットに IPMSG_FILEATTACHOPT を立て、ファイル
+	添付をサポート可能であることを表明します。
+
+     5) その他のコマンド
+
+	他のメンバのバージョンを取得するには、IPMSG_GETINFO コマンド
+	を送ります。受信側は拡張部にバージョン情報の文字列を設定した
+	IPMSG_SENDINFO を送り返します。
+
+	不在モードメンバの不在通知文を取得するには、IPMSG_GETABSENCEINFO
+	コマンドを送ります。受信側は、不在モード中なら不在通知文を設定
+	した、IPMSG_SENDABSENCEINFO を送り返します。不在モード中でない
+	場合、適当な文字列（"Not absence mode"など）を送り返します。
+
+     6) 確認・リトライ
+
+	一定時間以内に確認パケット（IPMSG_SENDMSG に対する、
+	IPMSG_RECVMSG など）が受け取れなかった場合、同一のパケットを
+	再送出します。リトライの回数・間隔については、実装依存です。
+
+
+  4. その他
+
+     1) 改行について
+
+	送出メッセージ内の改行文字は、UNIX形式に統一します('0x0a')。
+	必要に応じて、変換を行ってください。
+
+     2) デリミタ
+
+	デリミタに':'を使っている関係上、ユーザ名、ホスト名領域には、
+	':'を含む名前は、使えません。万一、自ホスト名が':'を含んでいる
+	場合、他の文字(たとえば';')などに置き換えて使用してください。
+	とくに必要性があるとは思えませんが、何か理由があれば、エスケー
+	プシーケンスでも考えたいと思います。
+
+     3) 漢字コード
+
+	漢字コードは、SJIS の使用を想定しています。
+
+
+  5. 連絡先
+
+	E-Mail shirouzu@h.email.ne.jp まで。
+
+
+附記
+	コマンドコードは、ipmsg.hを参照してください(苦笑)
+	現在、Client/Server 化などを可能にする protocol v2 を検討中です。
+	（といいつつ、v1 を拡張してばかりいますが...）
+	何かご意見・提案がありましたら、お寄せください。
+
